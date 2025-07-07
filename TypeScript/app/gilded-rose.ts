@@ -23,6 +23,18 @@ export class GildedRose {
     this.items = items;
   }
 
+  increaseQualityCapToFifty(quality: number, toIncrease: number) {
+    quality += toIncrease;
+    quality = Math.min(quality, 50);
+    return quality;
+  }
+
+  decreaseQualityFloorToZero(quality: number, toDecrease: number) {
+    quality -= toDecrease;
+    quality = Math.max(quality, 0);
+    return quality;
+  }
+
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       let quality = this.items[i].quality;
@@ -31,7 +43,7 @@ export class GildedRose {
       if (name != ItemName.AgedBrie && name != ItemName.BackstagePasses) {
         if (quality > 0) {
           if (name != ItemName.Sulfuras) {
-            quality = quality - 1
+            quality = this.decreaseQualityFloorToZero(quality, 1);
           }
         }
       } else {
@@ -39,14 +51,10 @@ export class GildedRose {
           quality = quality + 1
           if (name == ItemName.BackstagePasses) {
             if (sellIn < 11) {
-              if (quality < 50) {
-                quality = quality + 1
-              }
+              quality = this.increaseQualityCapToFifty(quality, 1);
             }
             if (sellIn < 6) {
-              if (quality < 50) {
-                quality = quality + 1
-              }
+              quality = this.increaseQualityCapToFifty(quality, 1);
             }
           }
         }
@@ -59,16 +67,14 @@ export class GildedRose {
           if (name != ItemName.BackstagePasses) {
             if (quality > 0) {
               if (name != ItemName.Sulfuras) {
-                quality = quality - 1
+                quality = this.decreaseQualityFloorToZero(quality, 1);
               }
             }
           } else {
-            quality = quality - quality
+            quality = 0;
           }
         } else {
-          if (quality < 50) {
-            quality = quality + 1
-          }
+          quality = this.increaseQualityCapToFifty(quality, 1);
         }
       }
       this.items[i].name = name;
