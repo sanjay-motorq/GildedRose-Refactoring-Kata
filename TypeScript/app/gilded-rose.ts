@@ -36,50 +36,44 @@ export class GildedRose {
   }
 
   updateQuality() {
-    for (let i = 0; i < this.items.length; i++) {
-      let quality = this.items[i].quality;
-      let name = this.items[i].name;
-      let sellIn = this.items[i].sellIn;
-      if (name != ItemName.AgedBrie && name != ItemName.BackstagePasses) {
-        if (quality > 0) {
-          if (name != ItemName.Sulfuras) {
-            quality = this.decreaseQualityFloorToZero(quality, 1);
+    for (let item of this.items) {
+      if (item.name != ItemName.AgedBrie && item.name != ItemName.BackstagePasses) {
+        if (item.quality > 0) {
+          if (item.name != ItemName.Sulfuras) {
+            item.quality = this.decreaseQualityFloorToZero(item.quality, 1);
           }
         }
       } else {
-        if (quality < 50) {
-          quality = quality + 1
-          if (name == ItemName.BackstagePasses) {
-            if (sellIn < 11) {
-              quality = this.increaseQualityCapToFifty(quality, 1);
+        if (item.quality < 50) {
+          item.quality = item.quality + 1
+          if (item.name == ItemName.BackstagePasses) {
+            if (item.sellIn < 11) {
+              item.quality = this.increaseQualityCapToFifty(item.quality, 1);
             }
-            if (sellIn < 6) {
-              quality = this.increaseQualityCapToFifty(quality, 1);
+            if (item.sellIn < 6) {
+              item.quality = this.increaseQualityCapToFifty(item.quality, 1);
             }
           }
         }
       }
-      if (name != ItemName.Sulfuras) {
-        sellIn = sellIn - 1;
+      if (item.name != ItemName.Sulfuras) {
+        item.sellIn = item.sellIn - 1;
       }
-      if (sellIn < 0) {
-        if (name != ItemName.AgedBrie) {
-          if (name != ItemName.BackstagePasses) {
-            if (quality > 0) {
-              if (name != ItemName.Sulfuras) {
-                quality = this.decreaseQualityFloorToZero(quality, 1);
+      if (item.sellIn < 0) {
+        if (item.name != ItemName.AgedBrie) {
+          if (item.name != ItemName.BackstagePasses) {
+            if (item.quality > 0) {
+              if (item.name != ItemName.Sulfuras) {
+                item.quality = this.decreaseQualityFloorToZero(item.quality, 1);
               }
             }
           } else {
-            quality = 0;
+            item.quality = 0;
           }
         } else {
-          quality = this.increaseQualityCapToFifty(quality, 1);
+          item.quality = this.increaseQualityCapToFifty(item.quality, 1);
         }
       }
-      this.items[i].name = name;
-      this.items[i].quality = quality;
-      this.items[i].sellIn = sellIn;
     }
 
     return this.items;
