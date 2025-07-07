@@ -1,6 +1,6 @@
 import { Item } from "../gilded-rose";
 
-export class Sulfura {
+export class SulfuraUpdater {
     private item: Item;
     constructor(item: Item) {
         this.item = item;

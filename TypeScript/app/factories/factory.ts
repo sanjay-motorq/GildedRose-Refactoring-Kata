@@ -1,10 +1,10 @@
-import { AgedBrie } from "./aged-brie";
+import { AgedBrieUpdater } from "./aged-brie-updater";
 import { Item } from "../gilded-rose";
 import { ItemName } from "../enum";
-import { BackstagePass } from "./backstage-pass";
-import { Sulfura } from "./sulfura";
-import { Conjured } from "./conjured";
-import { DefaultItem } from "./default-item";
+import { BackstagePassUpdater } from "./backstage-pass-updater";
+import { SulfuraUpdater } from "./sulfura-updater";
+import { ConjuredUpdater } from "./conjured-updater";
+import { DefaultItemUpdater } from "./default-item-updater";
 
 export class Factory {
     private item: Item;
@@ -13,19 +13,19 @@ export class Factory {
     }
     updateQuality() {
         if(this.item.name == ItemName.AgedBrie) {
-            return new AgedBrie(this.item).updateQuality();
+            return new AgedBrieUpdater(this.item).updateQuality();
         }
         else if(this.item.name == ItemName.BackstagePasses) {
-            return new BackstagePass(this.item).updateQuality();
+            return new BackstagePassUpdater(this.item).updateQuality();
         }
         else if(this.item.name == ItemName.Sulfuras) {
-            return new Sulfura(this.item).updateQuality();
+            return new SulfuraUpdater(this.item).updateQuality();
         }
         // else if(this.item.name == ItemName.Conjured) {
-        //     return new Conjured(this.item).updateQuality();
+        //     return new ConjuredUpdater(this.item).updateQuality();
         // }
         else {
-            return new DefaultItem(this.item).updateQuality();
+            return new DefaultItemUpdater(this.item).updateQuality();
         }
     }
 }

@@ -1,6 +1,6 @@
 import { Item } from "../gilded-rose";
 
-export class AgedBrie {
+export class AgedBrieUpdater {
     private item: Item;
     constructor(item: Item) {
         this.item = item;

@@ -1,6 +1,6 @@
 import { Item } from "../gilded-rose";
 
-export class BackstagePass {
+export class BackstagePassUpdater {
     private item: Item;
     constructor(item: Item) {
         this.item = item;

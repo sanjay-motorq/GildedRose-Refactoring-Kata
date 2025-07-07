@@ -1,14 +1,14 @@
 import { Item } from "../gilded-rose";
 
-export class DefaultItem {
+export class ConjuredUpdater {
     private item: Item;
     constructor(item: Item) {
         this.item = item;
     }
     decreaseQuality() {
         let quality = this.item.quality;
-        if(this.item.sellIn <= 0) quality -= 2;
-        else quality -= 1;
+        if(this.item.sellIn <= 0) quality -= 4;
+        else quality -= 2;
         this.item.quality = Math.max(quality, 0);
     }
     decreaseSellIn() {
