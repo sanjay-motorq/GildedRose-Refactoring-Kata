@@ -4,7 +4,7 @@ import { ItemName } from "../enum";
 import { BackstagePassUpdater } from "./backstage-pass-updater";
 import { SulfuraUpdater } from "./sulfura-updater";
 import { ConjuredUpdater } from "./conjured-updater";
-import { DefaultItemUpdater } from "./default-item-updater";
+import { DefaultUpdater } from "./default-updater";
 
 export class Factory {
     private item: Item;
@@ -25,7 +25,7 @@ export class Factory {
         //     return new ConjuredUpdater().updateQuality(this.item);
         // }
         else {
-            return new DefaultItemUpdater().updateQuality(this.item);
+            return new DefaultUpdater().updateQuality(this.item);
         }
     }
 }

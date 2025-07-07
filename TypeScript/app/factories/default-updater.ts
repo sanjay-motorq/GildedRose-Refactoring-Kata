@@ -1,7 +1,7 @@
 import { Item } from "../gilded-rose";
 import { Updater } from "./updater";
 
-export class DefaultItemUpdater implements Updater {
+export class DefaultUpdater implements Updater {
     decreaseQuality(item: Item) {
         let quality = item.quality;
         if(item.sellIn <= 0) quality -= 2;
