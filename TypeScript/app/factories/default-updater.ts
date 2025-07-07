@@ -2,13 +2,13 @@ import { Item } from "../gilded-rose";
 import { Updater } from "./updater";
 
 export class DefaultUpdater implements Updater {
-    decreaseQuality(item: Item) {
+    private decreaseQuality(item: Item) {
         let quality = item.quality;
         if(item.sellIn <= 0) quality -= 2;
         else quality -= 1;
         item.quality = Math.max(quality, 0);
     }
-    decreaseSellIn(item: Item) {
+    private decreaseSellIn(item: Item) {
         item.sellIn -= 1;
     }
     public updateQuality(item: Item) {

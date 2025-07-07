@@ -2,7 +2,7 @@ import { Item } from "../gilded-rose";
 import { Updater } from "./updater";
 
 export class BackstagePassUpdater implements Updater {
-    increaseQuality(item: Item) {
+    private increaseQuality(item: Item) {
         const sellIn = item.sellIn;
         if(sellIn <= 0) {
             item.quality = 0;

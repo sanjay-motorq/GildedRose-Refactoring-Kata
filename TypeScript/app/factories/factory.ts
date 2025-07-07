@@ -11,7 +11,7 @@ export class Factory {
     constructor(item: Item) {
         this.item = item;
     }
-    updateQuality() {
+    public updateQuality() {
         if(this.item.name == ItemName.AgedBrie) {
             return new AgedBrieUpdater().updateQuality(this.item);
         }
