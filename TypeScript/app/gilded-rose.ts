@@ -10,6 +10,12 @@ export class Item {
   }
 }
 
+export enum ItemName {
+  AgedBrie = 'Aged Brie',
+  BackstagePasses = 'Backstage passes to a TAFKAL80ETC concert',
+  Sulfuras = 'Sulfuras, Hand of Ragnaros'
+}
+
 export class GildedRose {
   items: Array<Item>;
 
@@ -19,49 +25,55 @@ export class GildedRose {
 
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-        if (this.items[i].quality > 0) {
-          if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-            this.items[i].quality = this.items[i].quality - 1
+      let quality = this.items[i].quality;
+      let name = this.items[i].name;
+      let sellIn = this.items[i].sellIn;
+      if (name != ItemName.AgedBrie && name != ItemName.BackstagePasses) {
+        if (quality > 0) {
+          if (name != ItemName.Sulfuras) {
+            quality = quality - 1
           }
         }
       } else {
-        if (this.items[i].quality < 50) {
-          this.items[i].quality = this.items[i].quality + 1
-          if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-            if (this.items[i].sellIn < 11) {
-              if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1
+        if (quality < 50) {
+          quality = quality + 1
+          if (name == ItemName.BackstagePasses) {
+            if (sellIn < 11) {
+              if (quality < 50) {
+                quality = quality + 1
               }
             }
-            if (this.items[i].sellIn < 6) {
-              if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1
+            if (sellIn < 6) {
+              if (quality < 50) {
+                quality = quality + 1
               }
             }
           }
         }
       }
-      if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-        this.items[i].sellIn = this.items[i].sellIn - 1;
+      if (name != ItemName.Sulfuras) {
+        sellIn = sellIn - 1;
       }
-      if (this.items[i].sellIn < 0) {
-        if (this.items[i].name != 'Aged Brie') {
-          if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-            if (this.items[i].quality > 0) {
-              if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].quality = this.items[i].quality - 1
+      if (sellIn < 0) {
+        if (name != ItemName.AgedBrie) {
+          if (name != ItemName.BackstagePasses) {
+            if (quality > 0) {
+              if (name != ItemName.Sulfuras) {
+                quality = quality - 1
               }
             }
           } else {
-            this.items[i].quality = this.items[i].quality - this.items[i].quality
+            quality = quality - quality
           }
         } else {
-          if (this.items[i].quality < 50) {
-            this.items[i].quality = this.items[i].quality + 1
+          if (quality < 50) {
+            quality = quality + 1
           }
         }
       }
+      this.items[i].name = name;
+      this.items[i].quality = quality;
+      this.items[i].sellIn = sellIn;
     }
 
     return this.items;
