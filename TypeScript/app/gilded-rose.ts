@@ -35,8 +35,21 @@ export class GildedRose {
     return quality;
   }
 
+  isUnknown(name: string) {
+    return !Object.values<string>(ItemName).includes(name)
+  }
+
   updateQuality() {
     for (let item of this.items) {
+      if (this.isUnknown(item.name)) {
+        if (item.sellIn <= 0) {
+          item.quality = this.decreaseQualityFloorToZero(item.quality, 1);
+        }
+        item.quality = this.decreaseQualityFloorToZero(item.quality, 1);
+        item.sellIn -= 1;
+        continue;
+      }
+
       if (item.name != ItemName.AgedBrie && item.name != ItemName.BackstagePasses) {
         if (item.quality > 0) {
           if (item.name != ItemName.Sulfuras) {
