@@ -4,11 +4,11 @@ import { ItemName } from "../enum";
 import { BackstagePass } from "./backstage-pass";
 import { Sulfura } from "./sulfura";
 import { Conjured } from "./conjured";
-import { DefaultItem } from "./defaultitem";
+import { DefaultItem } from "./default-item";
 
 export class Factory {
     private item: Item;
-    constructor(item) {
+    constructor(item: Item) {
         this.item = item;
     }
     updateQuality() {
@@ -21,9 +21,9 @@ export class Factory {
         else if(this.item.name == ItemName.Sulfuras) {
             return new Sulfura(this.item).updateQuality();
         }
-        else if(this.item.name == ItemName.Conjured) {
-            return new Conjured(this.item).updateQuality();
-        }
+        // else if(this.item.name == ItemName.Conjured) {
+        //     return new Conjured(this.item).updateQuality();
+        // }
         else {
             return new DefaultItem(this.item).updateQuality();
         }

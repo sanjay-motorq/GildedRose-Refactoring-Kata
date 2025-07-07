@@ -2,7 +2,7 @@ import { Item } from "../gilded-rose";
 
 export class Sulfura {
     private item: Item;
-    constructor(item) {
+    constructor(item: Item) {
         this.item = item;
     }
     public updateQuality() {

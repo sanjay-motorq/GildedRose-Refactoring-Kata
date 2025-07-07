@@ -1,21 +1,21 @@
 import { Item } from "../gilded-rose";
 
-export class AgedBrie {
+export class DefaultItem {
     private item: Item;
     constructor(item: Item) {
         this.item = item;
     }
-    private increaseQuality() {
+    decreaseQuality() {
         let quality = this.item.quality;
-        if(this.item.sellIn <= 0) quality += 2;
-        else quality += 1;
-        this.item.quality = Math.min(quality, 50);
+        if(this.item.sellIn <= 0) quality -= 2;
+        else quality -= 1;
+        this.item.quality = Math.max(quality, 0);
     }
-    private decreaseSellIn() {
+    decreaseSellIn() {
         this.item.sellIn -= 1;
     }
     public updateQuality() {
-        this.increaseQuality();
+        this.decreaseQuality();
         this.decreaseSellIn();
         return this.item;
     }
