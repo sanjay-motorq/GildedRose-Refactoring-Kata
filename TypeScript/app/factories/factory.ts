@@ -12,20 +12,17 @@ export class Factory {
         this.item = item;
     }
     public updateQuality() {
-        if(this.item.name == ItemName.AgedBrie) {
-            return new AgedBrieUpdater().updateQuality(this.item);
-        }
-        else if(this.item.name == ItemName.BackstagePasses) {
-            return new BackstagePassUpdater().updateQuality(this.item);
-        }
-        else if(this.item.name == ItemName.Sulfuras) {
-            return new SulfuraUpdater().updateQuality(this.item);
-        }
-        // else if(this.item.name == ItemName.Conjured) {
-        //     return new ConjuredUpdater().updateQuality(this.item);
-        // }
-        else {
-            return new DefaultUpdater().updateQuality(this.item);
+        switch(this.item.name) {
+            case(ItemName.AgedBrie):
+                return new AgedBrieUpdater().updateQuality(this.item);
+            case(ItemName.BackstagePasses):
+                return new BackstagePassUpdater().updateQuality(this.item);
+            case(ItemName.Sulfuras):
+                return new SulfuraUpdater().updateQuality(this.item);
+            // case(ItemName.Conjured):
+            //     return new ConjuredUpdater().updateQuality(this.item);
+            default:
+                return new DefaultUpdater().updateQuality(this.item);
         }
     }
 }
