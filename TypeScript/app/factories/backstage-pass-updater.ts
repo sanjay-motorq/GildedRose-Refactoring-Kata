@@ -1,33 +1,29 @@
 import { Item } from "../gilded-rose";
+import { Updater } from "./updater";
 
-export class BackstagePassUpdater {
-    private item: Item;
-    constructor(item: Item) {
-        this.item = item;
-    }
-    increaseQuality() {
-        const sellIn = this.item.sellIn;
-        let quality = this.item.quality;
+export class BackstagePassUpdater implements Updater {
+    increaseQuality(item: Item) {
+        const sellIn = item.sellIn;
         if(sellIn <= 0) {
-            quality = 0;
+            item.quality = 0;
         }
         else if(sellIn <= 5) {
-            quality += 3;
+            item.quality += 3;
         }
         else if(sellIn <= 10) {
-            quality += 2;
+            item.quality += 2;
         }
         else {
-            quality += 1;
+            item.quality += 1;
         }
-        this.item.quality = Math.min(quality, 50);
+        item.quality = Math.min(item.quality, 50);
     }
-    private decreaseSellIn() {
-        this.item.sellIn -= 1;
+    private decreaseSellIn(item: Item) {
+        item.sellIn -= 1;
     }
-    public updateQuality() {
-        this.increaseQuality();
-        this.decreaseSellIn();
-        return this.item;
+    public updateQuality(item: Item) {
+        this.increaseQuality(item);
+        this.decreaseSellIn(item);
+        return item;
     }
 }

@@ -1,22 +1,18 @@
 import { Item } from "../gilded-rose";
+import { Updater } from "./updater";
 
-export class ConjuredUpdater {
-    private item: Item;
-    constructor(item: Item) {
-        this.item = item;
+export class ConjuredUpdater implements Updater {
+    decreaseQuality(item: Item) {
+        if(item.sellIn <= 0) item.quality -= 4;
+        else item.quality -= 2;
+        item.quality = Math.max(item.quality, 0);
     }
-    decreaseQuality() {
-        let quality = this.item.quality;
-        if(this.item.sellIn <= 0) quality -= 4;
-        else quality -= 2;
-        this.item.quality = Math.max(quality, 0);
+    decreaseSellIn(item: Item) {
+        item.sellIn -= 1;
     }
-    decreaseSellIn() {
-        this.item.sellIn -= 1;
-    }
-    public updateQuality() {
-        this.decreaseQuality();
-        this.decreaseSellIn();
-        return this.item;
+    public updateQuality(item: Item) {
+        this.decreaseQuality(item);
+        this.decreaseSellIn(item);
+        return item;
     }
 }

@@ -13,19 +13,19 @@ export class Factory {
     }
     updateQuality() {
         if(this.item.name == ItemName.AgedBrie) {
-            return new AgedBrieUpdater(this.item).updateQuality();
+            return new AgedBrieUpdater().updateQuality(this.item);
         }
         else if(this.item.name == ItemName.BackstagePasses) {
-            return new BackstagePassUpdater(this.item).updateQuality();
+            return new BackstagePassUpdater().updateQuality(this.item);
         }
         else if(this.item.name == ItemName.Sulfuras) {
-            return new SulfuraUpdater(this.item).updateQuality();
+            return new SulfuraUpdater().updateQuality(this.item);
         }
         // else if(this.item.name == ItemName.Conjured) {
-        //     return new ConjuredUpdater(this.item).updateQuality();
+        //     return new ConjuredUpdater().updateQuality(this.item);
         // }
         else {
-            return new DefaultItemUpdater(this.item).updateQuality();
+            return new DefaultItemUpdater().updateQuality(this.item);
         }
     }
 }
