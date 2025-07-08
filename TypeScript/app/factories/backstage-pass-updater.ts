@@ -1,5 +1,6 @@
 import { Item } from "../gilded-rose";
 import { Updater } from "./updater";
+import { QUALITY_UPPER_BOUND } from "../constants";
 
 export class BackstagePassUpdater implements Updater {
     private increaseQuality(item: Item) {
@@ -16,7 +17,7 @@ export class BackstagePassUpdater implements Updater {
         else {
             item.quality += 1;
         }
-        item.quality = Math.min(item.quality, 50);
+        item.quality = Math.min(item.quality, QUALITY_UPPER_BOUND);
     }
     private decreaseSellIn(item: Item) {
         item.sellIn -= 1;
